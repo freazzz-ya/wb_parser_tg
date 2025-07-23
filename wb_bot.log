@@ -1,0 +1,286 @@
+2025-07-21 15:24:43,934 - __main__ - INFO - WBParser initialized
+2025-07-21 15:24:43,935 - __main__ - INFO - DataStorage initialized
+2025-07-21 15:24:43,936 - __main__ - INFO - Handlers setup completed
+2025-07-21 15:24:43,936 - __main__ - INFO - TelegramBot initialized
+2025-07-21 15:24:43,937 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 15:24:44,138 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 15:24:53,278 - __main__ - INFO - Check positions started by user 641371098
+2025-07-21 15:24:53,569 - __main__ - INFO - Loaded 5 queries
+2025-07-21 15:24:53,570 - __main__ - ERROR - Error in check_positions_handler: 'WBParser' object has no attribute 'get_city_params'
+2025-07-21 15:24:53,736 - aiogram.event - INFO - Update id=530029753 is handled. Duration 459 ms by bot id=7862175726
+2025-07-21 15:25:03,679 - aiogram.event - INFO - Update id=530029754 is not handled. Duration 0 ms by bot id=7862175726
+2025-07-21 16:08:18,821 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 16:08:18,823 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 16:08:18,823 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 16:08:19,086 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:08:25,394 - __main__ - INFO - WBParser initialized
+2025-07-21 16:08:25,395 - __main__ - INFO - DataStorage initialized
+2025-07-21 16:08:25,396 - __main__ - INFO - Handlers setup completed
+2025-07-21 16:08:25,397 - __main__ - INFO - TelegramBot initialized
+2025-07-21 16:08:25,397 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 16:08:25,602 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:08:40,176 - __main__ - INFO - Compare command from user 641371098
+2025-07-21 16:08:40,413 - __main__ - WARNING - Not enough files for comparison (need 2, have 0)
+2025-07-21 16:08:40,498 - aiogram.event - INFO - Update id=530029755 is handled. Duration 323 ms by bot id=7862175726
+2025-07-21 16:08:48,197 - __main__ - INFO - Check positions started by user 641371098
+2025-07-21 16:08:48,275 - __main__ - INFO - Loaded 5 queries
+2025-07-21 16:08:49,083 - __main__ - INFO - Using dest_id: 123589415 for city: Калуга
+2025-07-21 16:08:49,173 - __main__ - ERROR - Error parsing page 1 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,191 - __main__ - ERROR - Error parsing page 2 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,209 - __main__ - ERROR - Error parsing page 3 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,226 - __main__ - ERROR - Error parsing page 4 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,243 - __main__ - ERROR - Error parsing page 5 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,261 - __main__ - ERROR - Error parsing page 6 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,278 - __main__ - ERROR - Error parsing page 7 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,296 - __main__ - ERROR - Error parsing page 8 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,314 - __main__ - ERROR - Error parsing page 9 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,331 - __main__ - ERROR - Error parsing page 10 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:08:49,332 - __main__ - INFO - Found 0 products for query 'коврики на полки в холодильник'
+2025-07-21 16:08:50,350 - __main__ - ERROR - Error parsing page 1 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,367 - __main__ - ERROR - Error parsing page 2 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,385 - __main__ - ERROR - Error parsing page 3 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,403 - __main__ - ERROR - Error parsing page 4 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,420 - __main__ - ERROR - Error parsing page 5 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,438 - __main__ - ERROR - Error parsing page 6 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,455 - __main__ - ERROR - Error parsing page 7 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,473 - __main__ - ERROR - Error parsing page 8 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,491 - __main__ - ERROR - Error parsing page 9 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,508 - __main__ - ERROR - Error parsing page 10 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:08:50,509 - __main__ - INFO - Found 0 products for query 'коврик в холодильник в горошек'
+2025-07-21 16:08:51,527 - __main__ - ERROR - Error parsing page 1 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,546 - __main__ - ERROR - Error parsing page 2 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,568 - __main__ - ERROR - Error parsing page 3 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,586 - __main__ - ERROR - Error parsing page 4 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,604 - __main__ - ERROR - Error parsing page 5 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,624 - __main__ - ERROR - Error parsing page 6 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,642 - __main__ - ERROR - Error parsing page 7 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,660 - __main__ - ERROR - Error parsing page 8 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,679 - __main__ - ERROR - Error parsing page 9 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,697 - __main__ - ERROR - Error parsing page 10 for query 'крючки для полотенец': 'data'
+2025-07-21 16:08:51,697 - __main__ - INFO - Found 0 products for query 'крючки для полотенец'
+2025-07-21 16:08:52,717 - __main__ - ERROR - Error parsing page 1 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,736 - __main__ - ERROR - Error parsing page 2 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,753 - __main__ - ERROR - Error parsing page 3 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,772 - __main__ - ERROR - Error parsing page 4 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,789 - __main__ - ERROR - Error parsing page 5 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,806 - __main__ - ERROR - Error parsing page 6 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,824 - __main__ - ERROR - Error parsing page 7 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,841 - __main__ - ERROR - Error parsing page 8 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,858 - __main__ - ERROR - Error parsing page 9 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,875 - __main__ - ERROR - Error parsing page 10 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:08:52,876 - __main__ - INFO - Found 0 products for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:08:53,894 - __main__ - ERROR - Error parsing page 1 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,911 - __main__ - ERROR - Error parsing page 2 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,929 - __main__ - ERROR - Error parsing page 3 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,946 - __main__ - ERROR - Error parsing page 4 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,963 - __main__ - ERROR - Error parsing page 5 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,980 - __main__ - ERROR - Error parsing page 6 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:53,998 - __main__ - ERROR - Error parsing page 7 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:54,018 - __main__ - ERROR - Error parsing page 8 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:54,035 - __main__ - ERROR - Error parsing page 9 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:54,087 - __main__ - ERROR - Error parsing page 10 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:08:54,088 - __main__ - INFO - Found 0 products for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:08:55,190 - aiogram.event - INFO - Update id=530029756 is handled. Duration 6993 ms by bot id=7862175726
+2025-07-21 16:09:22,359 - __main__ - INFO - Check positions started by user 641371098
+2025-07-21 16:09:22,550 - __main__ - INFO - Loaded 5 queries
+2025-07-21 16:09:23,400 - __main__ - INFO - Using dest_id: 123589415 for city: Калуга
+2025-07-21 16:09:23,420 - __main__ - ERROR - Error parsing page 1 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,438 - __main__ - ERROR - Error parsing page 2 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,455 - __main__ - ERROR - Error parsing page 3 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,473 - __main__ - ERROR - Error parsing page 4 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,491 - __main__ - ERROR - Error parsing page 5 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,508 - __main__ - ERROR - Error parsing page 6 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,526 - __main__ - ERROR - Error parsing page 7 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,543 - __main__ - ERROR - Error parsing page 8 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,561 - __main__ - ERROR - Error parsing page 9 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,579 - __main__ - ERROR - Error parsing page 10 for query 'коврики на полки в холодильник': 'data'
+2025-07-21 16:09:23,581 - __main__ - INFO - Found 0 products for query 'коврики на полки в холодильник'
+2025-07-21 16:09:24,599 - __main__ - ERROR - Error parsing page 1 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,616 - __main__ - ERROR - Error parsing page 2 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,633 - __main__ - ERROR - Error parsing page 3 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,650 - __main__ - ERROR - Error parsing page 4 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,667 - __main__ - ERROR - Error parsing page 5 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,684 - __main__ - ERROR - Error parsing page 6 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,702 - __main__ - ERROR - Error parsing page 7 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,720 - __main__ - ERROR - Error parsing page 8 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,741 - __main__ - ERROR - Error parsing page 9 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,801 - __main__ - ERROR - Error parsing page 10 for query 'коврик в холодильник в горошек': 'data'
+2025-07-21 16:09:24,801 - __main__ - INFO - Found 0 products for query 'коврик в холодильник в горошек'
+2025-07-21 16:09:25,819 - __main__ - ERROR - Error parsing page 1 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,836 - __main__ - ERROR - Error parsing page 2 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,854 - __main__ - ERROR - Error parsing page 3 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,871 - __main__ - ERROR - Error parsing page 4 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,888 - __main__ - ERROR - Error parsing page 5 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,905 - __main__ - ERROR - Error parsing page 6 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,922 - __main__ - ERROR - Error parsing page 7 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,940 - __main__ - ERROR - Error parsing page 8 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,957 - __main__ - ERROR - Error parsing page 9 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,975 - __main__ - ERROR - Error parsing page 10 for query 'крючки для полотенец': 'data'
+2025-07-21 16:09:25,976 - __main__ - INFO - Found 0 products for query 'крючки для полотенец'
+2025-07-21 16:09:26,995 - __main__ - ERROR - Error parsing page 1 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,012 - __main__ - ERROR - Error parsing page 2 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,030 - __main__ - ERROR - Error parsing page 3 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,047 - __main__ - ERROR - Error parsing page 4 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,065 - __main__ - ERROR - Error parsing page 5 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,083 - __main__ - ERROR - Error parsing page 6 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,100 - __main__ - ERROR - Error parsing page 7 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,141 - __main__ - ERROR - Error parsing page 8 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,161 - __main__ - ERROR - Error parsing page 9 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,180 - __main__ - ERROR - Error parsing page 10 for query 'крючок для ванной самоклеющийся': 'data'
+2025-07-21 16:09:27,181 - __main__ - INFO - Found 0 products for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:09:28,203 - __main__ - ERROR - Error parsing page 1 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,220 - __main__ - ERROR - Error parsing page 2 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,247 - __main__ - ERROR - Error parsing page 3 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,265 - __main__ - ERROR - Error parsing page 4 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,282 - __main__ - ERROR - Error parsing page 5 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,299 - __main__ - ERROR - Error parsing page 6 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,316 - __main__ - ERROR - Error parsing page 7 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,333 - __main__ - ERROR - Error parsing page 8 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,351 - __main__ - ERROR - Error parsing page 9 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,368 - __main__ - ERROR - Error parsing page 10 for query 'чехол для наушников airpods pro 2': 'data'
+2025-07-21 16:09:28,369 - __main__ - INFO - Found 0 products for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:09:29,482 - aiogram.event - INFO - Update id=530029757 is handled. Duration 7124 ms by bot id=7862175726
+2025-07-21 16:18:07,981 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 16:18:07,983 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 16:18:07,984 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 16:18:08,240 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:18:14,553 - __main__ - INFO - WBParser initialized
+2025-07-21 16:18:14,554 - __main__ - INFO - DataStorage initialized
+2025-07-21 16:18:14,555 - __main__ - INFO - Handlers setup completed
+2025-07-21 16:18:14,555 - __main__ - INFO - TelegramBot initialized
+2025-07-21 16:18:14,556 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 16:18:14,742 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:20:08,194 - __main__ - INFO - Compare command from user 641371098
+2025-07-21 16:20:08,483 - __main__ - WARNING - Not enough files for comparison (need 2, have 0)
+2025-07-21 16:20:08,644 - aiogram.event - INFO - Update id=530029758 is handled. Duration 451 ms by bot id=7862175726
+2025-07-21 16:20:15,343 - __main__ - INFO - Check positions started by user 641371098
+2025-07-21 16:20:15,431 - __main__ - INFO - Loaded 5 queries
+2025-07-21 16:20:15,652 - geopy - INFO - Received an HTTP error (403): <html>
+<head>
+<title>Access blocked</title>
+</head>
+<body>
+<h1>Access blocked</h1>
+
+<p>You have been blocked because you have violated the
+<a href="https://operations.osmfoundation.org/policies/nominatim/">usage policy</a>
+of OSM's Nominatim geocoding service. Please be aware that OSM's resources are
+limited and shared between many users. The usage policy is there to ensure that
+the service remains usable for everybody.</p>
+
+<p>Please review the terms and make sure that your
+software adheres to the terms. You should in particular verify that you have set a
+<b>custom HTTP referrer or HTTP user agent</b> that identifies your application, and
+that you are not overusing the service with massive bulk requests.</p>
+
+<p>If you feel that this block is unjustified or remains after you have adopted
+your usage, you may contact the Nominatim system administrator at
+nominatim@openstreetmap.org to have this block lifted.</p>
+</body>
+</head>
+
+2025-07-21 16:20:15,654 - __main__ - ERROR - Ошибка получения geo-info для Калуга: Non-successful status code 403
+2025-07-21 16:20:15,654 - __main__ - INFO - Using dest_id: 123589415 for city: Калуга
+2025-07-21 16:20:15,822 - __main__ - WARNING - No products found on page 1 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:15,879 - __main__ - WARNING - No products found on page 2 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:15,909 - __main__ - WARNING - No products found on page 3 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:15,949 - __main__ - WARNING - No products found on page 4 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:15,973 - __main__ - WARNING - No products found on page 5 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,028 - __main__ - WARNING - No products found on page 6 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,087 - __main__ - WARNING - No products found on page 7 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,112 - __main__ - WARNING - No products found on page 8 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,157 - __main__ - WARNING - No products found on page 9 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,250 - __main__ - WARNING - No products found on page 10 for query 'коврики на полки в холодильник'
+2025-07-21 16:20:16,251 - __main__ - INFO - Found 0 products for query 'коврики на полки в холодильник'
+2025-07-21 16:20:18,405 - __main__ - WARNING - No products found on page 1 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,530 - __main__ - WARNING - No products found on page 2 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,693 - __main__ - WARNING - No products found on page 3 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,726 - __main__ - WARNING - No products found on page 4 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,778 - __main__ - WARNING - No products found on page 5 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,937 - __main__ - WARNING - No products found on page 6 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:18,991 - __main__ - WARNING - No products found on page 7 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:19,048 - __main__ - WARNING - No products found on page 8 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:19,087 - __main__ - WARNING - No products found on page 9 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:19,136 - __main__ - WARNING - No products found on page 10 for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:19,137 - __main__ - INFO - Found 0 products for query 'коврик в холодильник в горошек'
+2025-07-21 16:20:20,168 - __main__ - WARNING - No products found on page 1 for query 'крючки для полотенец'
+2025-07-21 16:20:20,207 - __main__ - WARNING - No products found on page 2 for query 'крючки для полотенец'
+2025-07-21 16:20:20,260 - __main__ - WARNING - No products found on page 3 for query 'крючки для полотенец'
+2025-07-21 16:20:20,321 - __main__ - WARNING - No products found on page 4 for query 'крючки для полотенец'
+2025-07-21 16:20:20,473 - __main__ - WARNING - No products found on page 5 for query 'крючки для полотенец'
+2025-07-21 16:20:20,521 - __main__ - WARNING - No products found on page 6 for query 'крючки для полотенец'
+2025-07-21 16:20:20,602 - __main__ - WARNING - No products found on page 7 for query 'крючки для полотенец'
+2025-07-21 16:20:20,631 - __main__ - WARNING - No products found on page 8 for query 'крючки для полотенец'
+2025-07-21 16:20:20,674 - __main__ - WARNING - No products found on page 9 for query 'крючки для полотенец'
+2025-07-21 16:20:20,727 - __main__ - WARNING - No products found on page 10 for query 'крючки для полотенец'
+2025-07-21 16:20:20,727 - __main__ - INFO - Found 0 products for query 'крючки для полотенец'
+2025-07-21 16:20:21,761 - __main__ - WARNING - No products found on page 1 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,801 - __main__ - WARNING - No products found on page 2 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,837 - __main__ - WARNING - No products found on page 3 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,882 - __main__ - WARNING - No products found on page 4 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,910 - __main__ - WARNING - No products found on page 5 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,951 - __main__ - WARNING - No products found on page 6 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:21,978 - __main__ - WARNING - No products found on page 7 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:22,010 - __main__ - WARNING - No products found on page 8 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:22,134 - __main__ - WARNING - No products found on page 9 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:22,168 - __main__ - WARNING - No products found on page 10 for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:22,169 - __main__ - INFO - Found 0 products for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:20:23,203 - __main__ - WARNING - No products found on page 1 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,229 - __main__ - WARNING - No products found on page 2 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,280 - __main__ - WARNING - No products found on page 3 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,312 - __main__ - WARNING - No products found on page 4 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,343 - __main__ - WARNING - No products found on page 5 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,376 - __main__ - WARNING - No products found on page 6 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,450 - __main__ - WARNING - No products found on page 7 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,558 - __main__ - WARNING - No products found on page 8 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,585 - __main__ - WARNING - No products found on page 9 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,647 - __main__ - WARNING - No products found on page 10 for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:23,647 - __main__ - INFO - Found 0 products for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:20:24,736 - aiogram.event - INFO - Update id=530029759 is handled. Duration 9393 ms by bot id=7862175726
+2025-07-21 16:20:30,654 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 16:20:30,656 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 16:20:30,656 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 16:20:30,911 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:20:37,404 - __main__ - INFO - WBParser initialized
+2025-07-21 16:20:37,405 - __main__ - INFO - DataStorage initialized
+2025-07-21 16:20:37,406 - __main__ - INFO - Handlers setup completed
+2025-07-21 16:20:37,406 - __main__ - INFO - TelegramBot initialized
+2025-07-21 16:20:37,408 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 16:20:37,610 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:21:29,820 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 16:21:29,821 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 16:21:29,821 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 16:21:30,078 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:26:22,353 - __main__ - INFO - WBParser initialized
+2025-07-21 16:26:22,354 - __main__ - INFO - DataStorage initialized
+2025-07-21 16:26:22,355 - __main__ - INFO - TelegramBot initialized
+2025-07-21 16:26:22,355 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 16:26:22,542 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:26:45,924 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 16:26:45,926 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 16:26:45,926 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 16:26:46,179 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:26:52,129 - __main__ - INFO - WBParser initialized
+2025-07-21 16:26:52,130 - __main__ - INFO - DataStorage initialized
+2025-07-21 16:26:52,131 - __main__ - INFO - TelegramBot initialized
+2025-07-21 16:26:52,131 - aiogram.dispatcher - INFO - Start polling
+2025-07-21 16:26:52,318 - aiogram.dispatcher - INFO - Run polling for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
+2025-07-21 16:26:57,657 - aiogram.event - INFO - Update id=530029761 is handled. Duration 466 ms by bot id=7862175726
+2025-07-21 16:27:04,818 - __main__ - INFO - Loaded 5 queries
+2025-07-21 16:27:04,910 - __main__ - INFO - Found 0 products for query 'коврики на полки в холодильник'
+2025-07-21 16:27:06,034 - __main__ - INFO - Found 0 products for query 'коврик в холодильник в горошек'
+2025-07-21 16:27:07,060 - __main__ - INFO - Found 0 products for query 'крючки для полотенец'
+2025-07-21 16:27:08,092 - __main__ - INFO - Found 0 products for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:27:09,123 - __main__ - INFO - Found 0 products for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:27:10,215 - aiogram.event - INFO - Update id=530029762 is handled. Duration 5503 ms by bot id=7862175726
+2025-07-21 16:36:19,820 - __main__ - INFO - Loaded 5 queries
+2025-07-21 16:36:19,895 - __main__ - INFO - Found 0 products for query 'коврики на полки в холодильник'
+2025-07-21 16:36:21,025 - __main__ - INFO - Found 0 products for query 'коврик в холодильник в горошек'
+2025-07-21 16:36:22,051 - __main__ - INFO - Found 0 products for query 'крючки для полотенец'
+2025-07-21 16:36:23,080 - __main__ - INFO - Found 0 products for query 'крючок для ванной самоклеющийся'
+2025-07-21 16:36:24,109 - __main__ - INFO - Found 0 products for query 'чехол для наушников airpods pro 2'
+2025-07-21 16:36:25,233 - aiogram.event - INFO - Update id=530029763 is handled. Duration 5503 ms by bot id=7862175726
+2025-07-21 17:12:42,996 - aiogram.dispatcher - INFO - Polling stopped
+2025-07-21 17:12:42,997 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2025-07-21 17:12:42,998 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7862175726)
+2025-07-21 17:12:43,256 - aiogram.dispatcher - INFO - Polling stopped for bot @Mac_ru_bot id=7862175726 - 'macBot.ru'
