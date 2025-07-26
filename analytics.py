@@ -20,10 +20,97 @@ logging.basicConfig(
 class WBAnalytics:
     def __init__(self, data_file: str):
         self.data_file = data_file
-        self.avg_positions_file = 'avg_positions_data.csv'
+        self.avg_positions_file = 'avg_positions_data.csv'  # Для отдельных товаров (старый функционал)
+        self.global_avg_file = 'global_avg_positions.csv'   # Новый файл для общих средних
         self.df = self._load_data()
         self.avg_df = self._load_avg_data()
+        self.global_avg_df = self._load_global_avg_data()
+        
 
+    def _load_global_avg_data(self) -> pd.DataFrame:
+            """Загрузка данных общих средних позиций"""
+            try:
+                if os.path.exists(self.global_avg_file):
+                    df = pd.read_csv(self.global_avg_file)
+                    df['Дата'] = pd.to_datetime(df['Дата'])
+                    return df
+            except Exception as e:
+                logger.error(f"Ошибка загрузки общих средних позиций: {e}")
+            return pd.DataFrame(columns=['Дата', 'Средняя_позиция'])
+
+    def update_global_avg_positions(self, new_data: pd.DataFrame):
+        """Обновление общих средних позиций"""
+        try:
+            if new_data.empty:
+                return
+
+            # Рассчитываем общую среднюю позицию
+            global_avg = round(new_data['Позиция'].mean(), 1)
+            current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+            # Создаем новую запись
+            new_record = pd.DataFrame({
+                'Дата': [current_time],
+                'Средняя_позиция': [global_avg]
+            })
+
+            # Загружаем историю и добавляем новую запись
+            if os.path.exists(self.global_avg_file):
+                history = pd.read_csv(self.global_avg_file)
+                updated = pd.concat([history, new_record])
+            else:
+                updated = new_record
+
+            # Сохраняем
+            updated.to_csv(self.global_avg_file, index=False)
+            logger.info(f"Обновлены общие средние позиции. Текущее значение: {global_avg}")
+
+        except Exception as e:
+            logger.error(f"Ошибка обновления общих средних позиций: {e}")
+
+
+    def generate_global_avg_graph(self) -> Optional[BufferedInputFile]:
+        """Генерация графика общих средних позиций"""
+        try:
+            if not os.path.exists(self.global_avg_file):
+                return None
+
+            global_data = pd.read_csv(self.global_avg_file)
+            global_data['Дата'] = pd.to_datetime(global_data['Дата'])
+            global_data = global_data.sort_values('Дата')
+            global_data['Проверка'] = range(1, len(global_data)+1)
+
+            plt.figure(figsize=(12, 6))
+            plt.plot(global_data['Проверка'], 
+                    global_data['Средняя_позиция'], 
+                    marker='o', 
+                    linestyle='-', 
+                    color='green',
+                    linewidth=2)
+
+            # Добавляем подписи
+            for i, row in global_data.iterrows():
+                date_str = row['Дата'].strftime('%d.%m %H:%M')
+                plt.text(row['Проверка'], row['Средняя_позиция'], 
+                        f"{row['Средняя_позиция']}\n({date_str})",
+                        ha='center', 
+                        va='bottom' if i%2 else 'top')
+
+            plt.gca().invert_yaxis()
+            plt.title("Динамика общих средних позиций\nпо всем товарам и запросам")
+            plt.xlabel('Номер проверки')
+            plt.ylabel('Средняя позиция')
+            plt.grid(True)
+            
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png', dpi=100)
+            buf.seek(0)
+            plt.close()
+            return BufferedInputFile(buf.getvalue(), filename="global_avg.png")
+
+        except Exception as e:
+            logger.error(f"Ошибка генерации общего графика: {e}")
+            return None
 
     def _load_data(self) -> pd.DataFrame:
         """Загрузка основных данных"""

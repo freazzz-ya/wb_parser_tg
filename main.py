@@ -177,10 +177,11 @@ class TelegramBot:
         self.dp.message(F.text == '📌 Топ товаров')(self.top_products_handler)
         self.dp.message(F.text == '📉 Динамика товара')(self.product_dynamics_handler)
         self.dp.message(F.text == '🏆 Анализ категории')(self.category_analysis_handler)
+        self.dp.message(F.text == '📊 Общая динамика')(self.global_dynamics_handler)
         self.dp.message(F.text == '🔍 Анализ запроса')(self.query_analysis_handler)
         self.dp.message(F.text == '📢 Эффективность промо')(self.promo_analysis_handler)
         self.dp.message(F.text == 'ℹ️ Информация')(self.info_handler)
-        
+    
         # Обработчики состояний
         self.dp.message(StateFilter(Form.waiting_for_article))(self.handle_article_input)
         self.dp.message(StateFilter(Form.waiting_for_category))(self.handle_category_input)
@@ -195,26 +196,47 @@ class TelegramBot:
         await self.show_main_menu(message)
 
     async def show_main_menu(self, message: types.Message):
-        """Показать главное меню"""
+        """Показать главное меню с правильной группировкой кнопок"""
         builder = ReplyKeyboardBuilder()
-        builder.row(KeyboardButton(text="📊 Проверить позиции"))
-        builder.row(KeyboardButton(text="📈 Сравнить с предыдущим"))
-        builder.row(KeyboardButton(text="📌 Топ товаров"))
-        builder.row(
-            KeyboardButton(text="📉 Динамика товара"),
-            KeyboardButton(text="🏆 Анализ категории")
-        )
-        builder.row(
-            KeyboardButton(text="🔍 Анализ запроса"),
-            KeyboardButton(text="📢 Эффективность промо")
-        )
-        builder.row(KeyboardButton(text="ℹ️ Информация"))
         
+        # Первый ряд - основные действия
+        builder.row(KeyboardButton(text="📊 Проверить позиции"))
+        
+        # Второй ряд - сравнение и аналитика
+        builder.row(
+            KeyboardButton(text="📈 Сравнить с предыдущим"),
+            KeyboardButton(text="📊 Общая динамика")  # Новая кнопка здесь
+        )
+        
+        # Третий ряд - топы и динамика
+        builder.row(
+            KeyboardButton(text="📌 Топ товаров"),
+            KeyboardButton(text="📉 Динамика товара")
+        )
+        
+        # Четвертый ряд - анализ
+        builder.row(
+            KeyboardButton(text="🏆 Анализ категории"),
+            KeyboardButton(text="🔍 Анализ запроса")
+        )
+        
+        # Пятый ряд - доп. функции
+        builder.row(
+            KeyboardButton(text="📢 Эффективность промо"),
+            KeyboardButton(text="ℹ️ Информация")
+        )
+        
+        # Настройки клавиатуры
+        keyboard = builder.as_markup(
+            resize_keyboard=True,
+            input_field_placeholder="Выберите действие..."
+        )
+
         await message.answer(
             f"👋 Привет, {message.from_user.first_name}!\n"
             "Я твой персональный аналитик Wildberries!\n"
             "Выбери действие из меню ниже:",
-            reply_markup=builder.as_markup(resize_keyboard=True)
+            reply_markup=keyboard
         )
 
     async def info_handler(self, message: types.Message, state: FSMContext):
@@ -359,7 +381,23 @@ class TelegramBot:
             "Введите название категории для анализа:",
             reply_markup=types.ReplyKeyboardRemove()
         )
-
+    async def global_dynamics_handler(self, message: types.Message, state: FSMContext):
+        """Обработчик кнопки общей динамики"""
+        try:
+            analytics = WBAnalytics(CONFIG['DATA_FILE'])
+            graph = analytics.generate_global_avg_graph()
+            
+            if graph:
+                caption = "📊 <b>Динамика общих средних позиций</b>\n\n" \
+                        "Среднее значение по всем товарам и запросам"
+                await message.answer_photo(graph, caption=caption, parse_mode="HTML")
+            else:
+                await message.answer("❌ Нет данных для построения графика")
+                
+        except Exception as e:
+            logger.error(f"Ошибка в global_dynamics_handler: {e}")
+            await message.answer("⚠️ Произошла ошибка при генерации графика")
+    
     async def handle_category_input(self, message: types.Message, state: FSMContext):
         """Обработка выбора категории"""
         if message.text == "❌ Отмена":
@@ -540,28 +578,6 @@ class TelegramBot:
 
 
 
-    async def show_main_menu(self, message: types.Message):
-        """Показать главное меню"""
-        builder = ReplyKeyboardBuilder()
-        builder.row(KeyboardButton(text="📊 Проверить позиции"))
-        builder.row(KeyboardButton(text="📈 Сравнить с предыдущим"))
-        builder.row(KeyboardButton(text="📌 Топ товаров"))
-        builder.row(
-            KeyboardButton(text="📉 Динамика товара"),
-            KeyboardButton(text="🏆 Анализ категории")
-        )
-        builder.row(
-            KeyboardButton(text="🔍 Анализ запроса"),
-            KeyboardButton(text="📢 Эффективность промо")
-        )
-        builder.row(KeyboardButton(text="ℹ️ Информация"))
-        
-        await message.answer(
-            f"👋 Привет, {message.from_user.first_name}!\n"
-            "Я твой персональный аналитик Wildberries!\n"
-            "Выбери действие из меню ниже:",
-            reply_markup=builder.as_markup(resize_keyboard=True)
-        )
     async def product_dynamics_handler(self, message: types.Message, state: FSMContext):
         """Обработчик кнопки 'Динамика товара' с улучшенной проверкой данных"""
         try:
@@ -918,7 +934,7 @@ class TelegramBot:
             # Обновляем средние позиции
             analytics = WBAnalytics(CONFIG['DATA_FILE'])
             analytics.update_avg_positions(self.current_data)
-            
+            analytics.update_global_avg_positions(self.current_data) 
             await self.send_results(message, self.current_data)
             
         except Exception as e:
