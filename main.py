@@ -243,89 +243,113 @@ class TelegramBot:
 
     # Обработчики кнопок
     async def product_dynamics_handler(self, message: types.Message, state: FSMContext):
-        """Обработчик кнопки 'Динамика товара'"""
-        await state.set_state(Form.waiting_for_article)
-        await message.answer(
-            "Введите артикул товара для анализа динамики:",
-            reply_markup=types.ReplyKeyboardRemove()
-        )
-
-    async def handle_article_input(self, message: types.Message, state: FSMContext):
-        """Обработка ввода артикула с полной проверкой"""
-        if message.text == "❌ Отмена":
-            await state.clear()
-            await self.show_main_menu(message)
-            return
-
-        article = message.text.strip()
-        await state.clear()
-
+        """Обработчик кнопки 'Динамика товара' с улучшенной обработкой ошибок"""
         try:
-            # Логирование для отладки
-            logger.info(f"Начата обработка артикула: {article}")
-            
-            analytics = WBAnalytics(CONFIG['DATA_FILE'])
-            
-            # Получаем данные с новым методом
-            product_data, stats = analytics.get_product_data(article)
-            
-            if product_data is None:
-                # Показываем доступные артикулы для выбора
-                available_articles = analytics.get_available_articles()
-                logger.info(f"Доступные артикулы: {available_articles[:5]}...")
-                
-                builder = ReplyKeyboardBuilder()
-                for art in available_articles[:50]:
-                    builder.add(KeyboardButton(text=str(art)))
-                builder.adjust(4)
-                builder.add(KeyboardButton(text="❌ Отмена"))
-                
-                await message.answer(
-                    f"❌ Товар с артикулом {article} не найден.\n"
-                    "Возможные причины:\n"
-                    "1. Артикул введен неверно\n"
-                    "2. Товар не отслеживается\n"
-                    "3. Нет данных в последней проверке\n\n"
-                    "Попробуйте выбрать артикул из списка:",
-                    reply_markup=builder.as_markup(resize_keyboard=True)
-                )
-                await state.set_state(Form.waiting_for_article)
+            # Проверяем существование файла данных
+            if not os.path.exists(CONFIG['DATA_FILE']):
+                await message.answer("❌ Файл с данными не найден. Сначала выполните проверку позиций.")
                 return
 
-            # Генерируем график
-            graph = analytics.generate_position_graph(article)
+            # Инициализируем аналитику
+            analytics = WBAnalytics(CONFIG['DATA_FILE'])
             
-            # Формируем ответ
-            response = (
+            # Проверяем, есть ли данные
+            if analytics.df.empty:
+                await message.answer("❌ Нет данных для анализа. Файл может быть пуст или поврежден.")
+                return
+
+            articles = analytics.get_available_articles()
+            
+            if not articles:
+                await message.answer("❌ В данных нет артикулов для анализа.")
+                return
+
+            # Создаем клавиатуру
+            builder = ReplyKeyboardBuilder()
+            for article in articles[:50]:  # Ограничиваем количество кнопок
+                builder.add(KeyboardButton(text=str(article)))
+            builder.adjust(4)
+            builder.add(KeyboardButton(text="❌ Отмена"))
+            
+            await state.set_state(Form.waiting_for_article)
+            await message.answer(
+                "📊 <b>Выберите артикул из списка:</b>\n"
+                f"Всего товаров в базе: {len(articles)}\n"
+                "Или введите артикул вручную",
+                reply_markup=builder.as_markup(resize_keyboard=True),
+                parse_mode="HTML"
+            )
+            
+        except Exception as e:
+            logger.error(f"Ошибка в product_dynamics_handler: {str(e)}", exc_info=True)
+            await message.answer(
+                "⚠️ Произошла ошибка при загрузке данных. Попробуйте позже или проверьте файл данных."
+            )
+            await state.clear()
+
+    async def handle_article_input(self, message: types.Message, state: FSMContext):
+        """Обработка ввода артикула с правильной проверкой DataFrame"""
+        try:
+            article = message.text.strip()
+            analytics = WBAnalytics(CONFIG['DATA_FILE'])
+            
+            # Получаем данные и статистику (исправленная проверка)
+            product_data, stats = analytics.get_product_data(article)
+            if product_data is None or product_data.empty or stats is None:
+                await message.answer(f"❌ Товар с артикулом {article} не найден")
+                return
+
+            # Генерируем оба графика
+            position_graph = analytics.generate_position_graph(article)
+            avg_position_graph = analytics.generate_avg_position_graph(article)
+            
+            # Проверяем, что хотя бы один график создан
+            if position_graph is None and avg_position_graph is None:
+                await message.answer("❌ Не удалось сгенерировать графики")
+                return
+
+            # Формируем текстовый ответ
+            response_text = (
                 f"📊 <b>Аналитика по товару:</b> {stats['name']}\n"
                 f"🔹 Артикул: {article}\n"
                 f"📁 Категория: {stats['category']}\n"
-                f"🕒 Первая проверка: {stats['first_check']}\n"
-                f"🕒 Последняя проверка: {stats['last_check']}\n\n"
+                f"📅 Период: {stats['first_check']} - {stats['last_check']}\n\n"
                 f"📌 <b>Статистика:</b>\n"
                 f"• Средняя позиция: {stats['avg_position']}\n"
                 f"• Лучшая позиция: {stats['best_position']}\n"
                 f"• Худшая позиция: {stats['worst_position']}\n"
-                f"• Количество запросов: {stats['queries_count']}\n"
+                f"• Отслеживается по {stats['queries_count']} запросам\n"
                 f"• Промо-позиций: {stats['promo_percentage']}%\n\n"
-                f"<i>График динамики позиций:</i>"
+                f"<i>Прокрутите вниз чтобы увидеть графики</i>"
             )
-            
-            await message.answer_photo(
-                graph,
-                caption=response,
-                parse_mode="HTML",
-                reply_markup=types.ReplyKeyboardRemove()
-            )
-            await self.show_main_menu(message)
-            
+
+            # Отправляем текстовое сообщение
+            await message.answer(response_text, parse_mode="HTML")
+
+            # Отправляем графики
+            if position_graph and avg_position_graph:
+                # Если есть оба графика - отправляем медиагруппой
+                media_group = [
+                    types.InputMediaPhoto(media=position_graph, caption="📈 Динамика позиций по запросам"),
+                    types.InputMediaPhoto(media=avg_position_graph, caption="📊 Динамика средних позиций")
+                ]
+                await message.answer_media_group(media_group)
+            elif position_graph:
+                await message.answer_photo(
+                    photo=position_graph,
+                    caption="📈 Динамика позиций по запросам"
+                )
+            elif avg_position_graph:
+                await message.answer_photo(
+                    photo=avg_position_graph,
+                    caption="📊 Динамика средних позиций"
+                )
+
         except Exception as e:
-            logger.error(f"Критическая ошибка в handle_article_input: {e}")
-            await message.answer(
-                "⚠️ Произошла критическая ошибка при обработке запроса. "
-                "Попробуйте позже или обратитесь к администратору.",
-                reply_markup=types.ReplyKeyboardRemove()
-            )
+            logger.error(f"Ошибка в handle_article_input: {str(e)}", exc_info=True)
+            await message.answer("⚠️ Произошла ошибка при обработке запроса")
+        finally:
+            await state.clear()
             await self.show_main_menu(message)
 
     async def category_analysis_handler(self, message: types.Message, state: FSMContext):
@@ -862,11 +886,16 @@ class TelegramBot:
         return " ".join(parts) if parts else "менее минуты"
 
     async def check_positions_handler(self, message: types.Message, state: FSMContext):
-        """Обработчик кнопки 'Проверить позиции'"""
-        await state.clear()
+        """Проверка позиций с сохранением данных для сравнения"""
         await message.answer("⏳ Начинаю сбор данных... Это может занять несколько минут.")
         
         try:
+            # Сохраняем текущие данные как предыдущие перед обновлением
+            if os.path.exists(CONFIG['DATA_FILE']):
+                self.previous_data = pd.read_csv(CONFIG['DATA_FILE'])
+                self.last_check_time = datetime.datetime.now()
+            
+            # Собираем новые данные
             data = []
             queries = self.parser.load_queries()
             
@@ -874,131 +903,104 @@ class TelegramBot:
                 geo_info = self.parser.get_city_params(city)
                 dest_id = geo_info.get('dest', CONFIG['GEO_FALLBACK_DEST']) if geo_info else CONFIG['GEO_FALLBACK_DEST']
                 
-                for query in tqdm(queries, desc=f"Обработка запросов для {city}"):
+                for query in queries:
                     data.extend(self.parser.parse_products(query, dest_id))
+                    time.sleep(CONFIG['REQUEST_DELAY'])
             
             if not data:
                 await message.answer("❌ Не удалось собрать данные. Попробуйте позже.")
                 return
                 
-            # Сохраняем предыдущие данные перед обновлением
-            if os.path.exists(CONFIG['DATA_FILE']):
-                self.previous_data = pd.read_csv(CONFIG['DATA_FILE'])
-            
-            # Сохраняем текущие данные
+            # Сохраняем новые данные
             self.current_data = pd.DataFrame(data)
-            self.current_data.to_csv(CONFIG['DATA_FILE'], index=False, encoding='utf-8')
-            self.last_check_time = datetime.datetime.now(MOSCOW_TZ)
+            self.current_data.to_csv(CONFIG['DATA_FILE'], index=False)
+            
+            # Обновляем средние позиции
+            analytics = WBAnalytics(CONFIG['DATA_FILE'])
+            analytics.update_avg_positions(self.current_data)
             
             await self.send_results(message, self.current_data)
             
         except Exception as e:
-            logger.error(f"Ошибка при проверке позиций: {e}")
+            logger.error(f"Ошибка при проверке позиций: {e}", exc_info=True)
             await message.answer(f"⚠️ Произошла ошибка: {e}")
 
     async def compare_results_handler(self, message: types.Message, state: FSMContext):
-        """Обработчик кнопки 'Сравнить с предыдущим'"""
-        await state.clear()
-        if self.previous_data is None or not os.path.exists(CONFIG['DATA_FILE']):
-            await message.answer("❌ Нет данных для сравнения. Сначала выполните проверку позиций.")
-            return
-        
+        """Сравнение текущих позиций с предыдущими"""
         try:
-            await message.answer("⏳ Готовлю сравнительный отчет...")
-            self.last_compare_time = datetime.datetime.now(MOSCOW_TZ)
-            
-            # Загружаем текущие данные из файла
-            current_df = pd.read_csv(CONFIG['DATA_FILE'])
-            previous_df = self.previous_data
-            
-            # Получаем время предыдущей проверки
-            prev_check_time = pd.to_datetime(previous_df['Дата'].iloc[0])
-            current_check_time = pd.to_datetime(current_df['Дата'].iloc[0])
-            
+            # Проверяем наличие данных для сравнения
+            if not hasattr(self, 'previous_data') or self.previous_data is None:
+                await message.answer("❌ Нет данных предыдущей проверки. Сначала выполните проверку позиций.")
+                return
+                
+            if not hasattr(self, 'current_data') or self.current_data is None:
+                await message.answer("❌ Нет текущих данных. Сначала выполните проверку позиций.")
+                return
+
             # Объединяем данные для сравнения
             merged = pd.merge(
-                previous_df, 
-                current_df, 
-                on=['Артикул', 'Запрос', 'Категория', 'Название'], 
-                suffixes=('_до', '_после')
+                self.previous_data, 
+                self.current_data,
+                on=['Артикул', 'Название', 'Запрос'],
+                suffixes=('_prev', '_curr'),
+                how='inner'
             )
+
+            if merged.empty:
+                await message.answer("❌ Нет общих товаров для сравнения")
+                return
+
+            # Формируем сообщение
+            response = ["📊 <b>Сравнение с предыдущей проверкой:</b>\n"]
             
-            # Создаем копию для безопасного изменения
-            comparison_df = merged.copy()
-            
-            # Рассчитываем изменение позиции
-            comparison_df['Изменение'] = comparison_df['Позиция_до'] - comparison_df['Позиция_после']
-            
-            # Сортируем по изменению позиции (наибольшее улучшение сначала)
-            comparison_df = comparison_df.sort_values(by='Изменение', ascending=False)
-            
-            # Группируем по товарам
-            grouped = comparison_df.groupby(['Категория', 'Артикул', 'Название'])
-            
-            messages = []
-            current_message = (
-                f"📊 <b>Сравнительный отчет по позициям</b>\n\n"
-                f"🕒 <b>Предыдущая проверка:</b> {prev_check_time.strftime('%d.%m.%Y %H:%M')} (МСК)\n"
-                f"🕒 <b>Текущая проверка:</b> {current_check_time.strftime('%d.%m.%Y %H:%M')} (МСК)\n"
-                f"⏳ <b>Прошло времени:</b> {self.format_timedelta(current_check_time - prev_check_time)}\n\n"
-                f"🟢 - улучшение позиции\n🔴 - ухудшение позиции\n⚪ - без изменений\n\n"
-            )
-            
-            for (category, article, name), group in grouped:
-                message_part = (
-                    f"📌 <b>Категория:</b> {category}\n"
-                    f"🔹 <b>Артикул:</b> {article}\n"
-                    f"<b>Название:</b> {name}\n"
-                )
+            for art in merged['Артикул'].unique():
+                art_data = merged[merged['Артикул'] == art]
+                product_name = art_data['Название'].iloc[0]
                 
-                changes = []
-                for _, row in group.iterrows():
-                    change = row['Изменение']
+                response.append(f"\n🔹 <b>{product_name}</b> (арт. {art})")
+                
+                for _, row in art_data.iterrows():
+                    change = row['Позиция_prev'] - row['Позиция_curr']
                     if change > 0:
                         emoji = "🟢"
-                        change_text = f"улучшение на {abs(change)}"
+                        change_text = f"+{change}"
                     elif change < 0:
                         emoji = "🔴"
-                        change_text = f"ухудшение на {abs(change)}"
+                        change_text = f"{change}"
                     else:
                         emoji = "⚪"
-                        change_text = "без изменений"
+                        change_text = "0"
                     
-                    promo_before = " (промо)" if row['Промо_до'] == 'Да' else ""
-                    promo_after = " (промо)" if row['Промо_после'] == 'Да' else ""
-                    
-                    changes.append(
+                    response.append(
                         f"{emoji} <i>{row['Запрос']}</i>\n"
-                        f"   До: {row['Позиция_до']}{promo_before}\n"
-                        f"   После: {row['Позиция_после']}{promo_after}\n"
-                        f"   Изменение: {change_text}\n"
+                        f"   Было: {row['Позиция_prev']} → Стало: {row['Позиция_curr']}\n"
+                        f"   Изменение: {change_text}"
                     )
-                
-                message_part += "\n".join(changes) + "\n\n"
-                
-                if len(current_message + message_part) > 4000:
-                    messages.append(current_message)
-                    current_message = message_part
+
+            # Разбиваем сообщение на части, если слишком длинное
+            msg_parts = []
+            current_part = ""
+            
+            for line in response:
+                if len(current_part + line) > 4000:
+                    msg_parts.append(current_part)
+                    current_part = line
                 else:
-                    current_message += message_part
+                    current_part += "\n" + line
+                    
+            if current_part:
+                msg_parts.append(current_part)
             
-            if current_message:
-                messages.append(current_message)
-            
-            # Добавляем аналитику
-            analytics = self.generate_analytics(comparison_df)
-            messages.append(analytics)
-            
-            for i, msg in enumerate(messages):
-                await message.answer(msg, parse_mode="HTML")
-                if i < len(messages) - 1:
-                    time.sleep(1)
-            
-            await message.answer("✅ Сравнение завершено!")
-            
+            # Отправляем сообщения
+            for part in msg_parts:
+                await message.answer(part, parse_mode="HTML")
+                await asyncio.sleep(1)
+                
+            await message.answer("✅ Сравнение завершено")
+
         except Exception as e:
-            logger.error(f"Ошибка при сравнении результатов: {e}")
-            await message.answer(f"⚠️ Произошла ошибка при сравнении: {e}")
+            logger.error(f"Ошибка при сравнении: {e}", exc_info=True)
+            await message.answer("⚠️ Произошла ошибка при сравнении данных")
 
 
     async def send_results(self, message: types.Message, data):
